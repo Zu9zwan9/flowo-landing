@@ -121,6 +121,22 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
                 {item}
               </motion.a>
             ))}
+            <motion.button
+              onClick={() => setCurrentPage('about')}
+              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+            >
+              About
+            </motion.button>
+            <motion.button
+              onClick={() => setCurrentPage('team')}
+              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 0 }}
+            >
+              Team
+            </motion.button>
             <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
               Join Beta
             </Button>
@@ -158,6 +174,24 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
                     {item}
                   </a>
                 ))}
+                <button
+                  className="text-gray-600 hover:text-purple-600 transition-colors font-medium text-left"
+                  onClick={() => {
+                    setCurrentPage('about');
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  About
+                </button>
+                <button
+                  className="text-gray-600 hover:text-purple-600 transition-colors font-medium text-left"
+                  onClick={() => {
+                    setCurrentPage('team');
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Team
+                </button>
                 <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 w-full">
                   Join Beta
                 </Button>
@@ -706,7 +740,7 @@ const BetaSignupSection = () => {
 }
 
 // Footer Component
-const Footer = ({ onPrivacyClick }) => {
+const Footer = ({ onPrivacyClick, onTeamClick, onAboutClick }) => {
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="container mx-auto px-4">
@@ -743,7 +777,10 @@ const Footer = ({ onPrivacyClick }) => {
             },
             {
               title: "Company",
-              links: ["About", "Team", "Careers"]
+              links: [
+                { text: "About", onClick: onAboutClick },
+                { text: "Team", onClick: onTeamClick }
+              ]
             },
             {
               title: "Support",
@@ -788,6 +825,187 @@ const Footer = ({ onPrivacyClick }) => {
   )
 }
 
+// Team Page Component
+const TeamPage = ({ onBack }) => {
+  const teamMembers = [
+    {
+      name: "Maksym Bardakh (Ivko)",
+      role: "Founder & CEO",
+      titles: ["Software Engineer", "ADHD Advocate"],
+      bio: "After being diagnosed with ADHD, Maksym embarked on a personal journey to find better ways to organize his life. He explored countless planning methods and productivity systems, searching for approaches that truly fit the neurodivergent mind. After successfully graduating from university, Maksym realized he had the skills — and the opportunity — to help others facing the same challenges. This vision led to the creation of Flowo: a platform designed to empower neurodivergent individuals to think, plan, and thrive in their own way. In early 2024, he initiated Flowo's first research project focused on understanding the specific needs of teens with ADHD, laying the foundation for tools built with real empathy and insight.",
+      initial: "M"
+    },
+    {
+      name: "Mykhailo Boichuk",
+      role: "CTO & Lead Engineer",
+      titles: ["Software Engineer", "ADHD Advocate"],
+      bio: "Mykhailo is a skilled software engineer passionate about creating technology that makes a real difference. During their university years, he and Maksym worked closely together, designing architectures, developing applications, and sharing a common vision for meaningful innovation. Deeply committed to projects that create social impact, Mykhailo immediately connected with the idea behind Flowo. As CTO, he leads the technical development of the platform, applying best practices in system design, scalability, and user-centered development. His expertise ensures that Flowo is not only powerful and reliable, but also intuitive and accessible for neurodivergent individuals. Together with Maksym, he continues to push Flowo forward, combining cutting-edge technology with a mission of real-world empowerment.",
+      initial: "M"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white">
+      <main className="pt-20">
+        <section className="py-20 bg-gradient-to-b from-purple-50 to-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-16 text-center"
+            >
+              <Button
+                variant="ghost"
+                className="mb-8"
+                onClick={onBack}
+              >
+                ← Back to Home
+              </Button>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Our Team
+              </h1>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Meet the passionate minds behind Flowo, dedicated to creating better planning tools for neurodivergent individuals.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+              {teamMembers.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="bg-white rounded-xl shadow-xl overflow-hidden"
+                >
+                  <div className="p-8">
+                    <div className="flex items-center mb-6">
+                      <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+                        {member.initial}
+                      </div>
+                      <div>
+                        <h2 className="text-2xl font-bold text-gray-900">{member.name}</h2>
+                        <p className="text-purple-600 font-medium">{member.role}</p>
+                      </div>
+                    </div>
+
+                    <div className="mb-6">
+                      {member.titles.map((title, i) => (
+                        <Badge key={i} className="mr-2 mb-2 bg-purple-100 text-purple-800 hover:bg-purple-200">
+                          {title}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    <p className="text-gray-600 leading-relaxed mb-6">
+                      {member.bio}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer
+        onPrivacyClick={() => onBack('privacy')}
+        onTeamClick={() => {}}
+        onAboutClick={() => onBack('about')}
+      />
+      <AccessibilityControls />
+    </div>
+  );
+};
+
+// About Page Component
+const AboutPage = ({ onBack }) => {
+  return (
+    <div className="min-h-screen bg-white">
+      <main className="pt-20">
+        <section className="py-20 bg-gradient-to-b from-purple-50 to-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-16 text-center"
+            >
+              <Button
+                variant="ghost"
+                className="mb-8"
+                onClick={onBack}
+              >
+                ← Back to Home
+              </Button>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                About Flowo
+              </h1>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Our journey to create better planning tools for neurodivergent minds.
+              </p>
+            </motion.div>
+
+            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
+              <div className="p-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Journey</h2>
+                  <p className="text-gray-600 leading-relaxed mb-8">
+                    Our journey began with firsthand experience: when Maksym was diagnosed with ADHD, it sparked a deeper exploration into the everyday challenges neurodivergent individuals face with traditional planning tools.
+                  </p>
+
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Research & Insights</h2>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    In early 2024, we initiated a research project focused on understanding the needs of ADHD teens. This included:
+                  </p>
+
+                  <ul className="list-disc pl-6 mb-8 text-gray-600 space-y-2">
+                    <li>1:1 interviews with neurodivergent individuals and their caregivers</li>
+                    <li>Online surveys targeting ADHD communities</li>
+                    <li>Observation sessions to understand how users interact with existing planning tools</li>
+                  </ul>
+
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Key Insights</h2>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    Key insights emerged consistently across our research:
+                  </p>
+
+                  <ul className="list-disc pl-6 mb-8 text-gray-600 space-y-2">
+                    <li>Difficulty initiating tasks</li>
+                    <li>Frustration with rigid, linear planning systems</li>
+                    <li>Overwhelm from traditional tools that demand high executive function</li>
+                    <li>The need for visual, intuitive, and forgiving systems</li>
+                    <li>A strong desire for tools that adapt to the user, not the other way around</li>
+                  </ul>
+
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Solution</h2>
+                  <p className="text-gray-600 leading-relaxed mb-8">
+                    This validation process shaped both the vision and functionality of Flowo. The user pain points we uncovered continue to guide our design and development priorities. We are building Flowo, a flexible planning tool designed from the ground up for ADHD'ers and other neurodivergent users. It includes features like visual timers, adaptive AI-generated checklists, and non-linear, intuitive scheduling that meets users where they are—mentally and emotionally.
+                  </p>
+
+                  <p className="text-gray-600 leading-relaxed font-medium">
+                    The core goal is to reduce overwhelm, support task initiation, and create a planning experience that aligns with how users actually think.
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer
+        onPrivacyClick={() => onBack('privacy')}
+        onTeamClick={() => onBack('team')}
+        onAboutClick={() => {}}
+      />
+      <AccessibilityControls />
+    </div>
+  );
+};
+
 // Main App Component
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -797,6 +1015,10 @@ function App() {
     switch (currentPage) {
       case 'privacy':
         return <PrivacyPolicy onBack={() => setCurrentPage('home')} />
+      case 'team':
+        return <TeamPage onBack={() => setCurrentPage('home')} />
+      case 'about':
+        return <AboutPage onBack={() => setCurrentPage('home')} />
       default:
         return (
           <div className="min-h-screen bg-white">
@@ -808,7 +1030,11 @@ function App() {
               <TestimonialsSection />
               <BetaSignupSection />
             </main>
-            <Footer onPrivacyClick={() => setCurrentPage('privacy')} />
+            <Footer
+              onPrivacyClick={() => setCurrentPage('privacy')}
+              onTeamClick={() => setCurrentPage('team')}
+              onAboutClick={() => setCurrentPage('about')}
+            />
             <AccessibilityControls />
           </div>
         )
@@ -829,4 +1055,3 @@ function App() {
 }
 
 export default App
-
