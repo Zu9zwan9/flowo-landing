@@ -273,14 +273,6 @@ const HeroSection = () => {
               <Sparkles className="w-5 h-5 mr-2" />
               Join Beta - Free Access
             </PulsingCTA>
-            <MagneticButton
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-purple-600 text-lg px-8 py-6 h-auto"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Learn More
-            </MagneticButton>
           </motion.div>
 
           <motion.div
@@ -290,6 +282,22 @@ const HeroSection = () => {
             <p className="text-sm sm:text-base opacity-75 mb-2">
               No credit card required • Free beta access
             </p>
+          </motion.div>
+
+          {/* Learn More button moved down and made adaptive */}
+          <motion.div
+            variants={fadeInUp}
+            className="mt-8 sm:mt-10 md:mt-12 flex justify-center"
+          >
+            <MagneticButton
+              variant="outline"
+              size="lg"
+              onClick={() => document.getElementById('why-flowo')?.scrollIntoView({ behavior: 'smooth' })}
+              className="border-white text-white hover:bg-white hover:text-purple-600 text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 h-auto w-full sm:w-auto max-w-xs mx-auto"
+            >
+              <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              Learn More
+            </MagneticButton>
           </motion.div>
         </motion.div>
 
@@ -304,13 +312,7 @@ const HeroSection = () => {
             whileHover={{ scale: 1.1 }}
             onClick={() => document.getElementById('why-flowo')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <span className="text-sm mb-2 sm:mb-3 md:mb-4">Scroll to explore</span>
-            <motion.div
-              animate={{ y: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5" />
-            </motion.div>
+
           </motion.div>
         </motion.div>
       </div>
@@ -855,6 +857,15 @@ const TeamPage = ({ onBack }) => {
     }
   ];
 
+  // Function to navigate to a section on the home page
+  const navigateToSection = (sectionId) => {
+    onBack();
+    // Use setTimeout to ensure the home page is loaded before scrolling
+    setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <main className="pt-20">
@@ -880,6 +891,38 @@ const TeamPage = ({ onBack }) => {
                 Meet the passionate minds behind Flowo, dedicated to creating better planning tools for neurodivergent individuals.
               </p>
             </motion.div>
+
+            {/* Quick Navigation */}
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('why-flowo')}
+              >
+                Why Flowo
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('who-its-for')}
+              >
+                Who It's For
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('mission')}
+              >
+                Mission
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('testimonials')}
+              >
+                Testimonials
+              </Button>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
               {teamMembers.map((member, index) => (
@@ -931,6 +974,15 @@ const TeamPage = ({ onBack }) => {
 
 // About Page Component
 const AboutPage = ({ onBack }) => {
+  // Function to navigate to a section on the home page
+  const navigateToSection = (sectionId) => {
+    onBack();
+    // Use setTimeout to ensure the home page is loaded before scrolling
+    setTimeout(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <main className="pt-20">
@@ -956,6 +1008,38 @@ const AboutPage = ({ onBack }) => {
                 Our journey to create better planning tools for neurodivergent minds.
               </p>
             </motion.div>
+
+            {/* Quick Navigation */}
+            <div className="flex flex-wrap justify-center gap-4 mb-12">
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('why-flowo')}
+              >
+                Why Flowo
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('who-its-for')}
+              >
+                Who It's For
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('mission')}
+              >
+                Mission
+              </Button>
+              <Button
+                variant="outline"
+                className="bg-white hover:bg-gray-50"
+                onClick={() => navigateToSection('testimonials')}
+              >
+                Testimonials
+              </Button>
+            </div>
 
             <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
               <div className="p-8">
@@ -1017,6 +1101,187 @@ const AboutPage = ({ onBack }) => {
   );
 };
 
+// Pricing Page Component
+const PricingPage = ({ onBack }) => {
+  const [billingCycle, setBillingCycle] = useState('monthly')
+
+  const plans = [
+    {
+      name: "Basic",
+      description: "Perfect for individuals just getting started",
+      price: billingCycle === 'monthly' ? 9.99 : 99.99,
+      features: [
+        "Visual task management",
+        "Flexible scheduling",
+        "Basic AI assistance",
+        "Mobile app access"
+      ],
+      highlighted: false
+    },
+    {
+      name: "Pro",
+      description: "Enhanced features for power users",
+      price: billingCycle === 'monthly' ? 19.99 : 199.99,
+      features: [
+        "Everything in Basic",
+        "Advanced AI-generated checklists",
+        "Custom visual timers",
+        "Progress analytics",
+        "Priority support"
+      ],
+      highlighted: true
+    },
+    {
+      name: "Team",
+      description: "Collaboration tools for groups",
+      price: billingCycle === 'monthly' ? 49.99 : 499.99,
+      features: [
+        "Everything in Pro",
+        "Team collaboration",
+        "Shared projects",
+        "Admin controls",
+        "Team analytics",
+        "Dedicated account manager"
+      ],
+      highlighted: false
+    }
+  ]
+
+  return (
+    <div className="min-h-screen bg-white">
+      <main className="pt-20">
+        <section className="py-20 bg-gradient-to-b from-purple-50 to-white">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-16 text-center"
+            >
+              <Button
+                variant="ghost"
+                className="mb-8"
+                onClick={onBack}
+              >
+                ← Back to Home
+              </Button>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Pricing Plans
+              </h1>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Choose the plan that works best for your needs. All plans include a 14-day free trial.
+              </p>
+
+              <div className="flex items-center justify-center mt-8 mb-12">
+                <div className="bg-gray-100 p-1 rounded-full flex items-center">
+                  <button
+                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                      billingCycle === 'monthly' 
+                        ? 'bg-white shadow-md text-purple-600' 
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                    onClick={() => setBillingCycle('monthly')}
+                  >
+                    Monthly
+                  </button>
+                  <button
+                    className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                      billingCycle === 'yearly' 
+                        ? 'bg-white shadow-md text-purple-600' 
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                    onClick={() => setBillingCycle('yearly')}
+                  >
+                    Yearly <span className="text-green-500 font-semibold">Save 16%</span>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {plans.map((plan, index) => (
+                <motion.div
+                  key={plan.name}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className={`bg-white rounded-xl overflow-hidden ${
+                    plan.highlighted 
+                      ? 'ring-2 ring-purple-500 shadow-xl transform md:scale-105' 
+                      : 'border border-gray-200 shadow-lg'
+                  }`}
+                >
+                  <div className="p-6">
+                    {plan.highlighted && (
+                      <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold uppercase tracking-wider py-1 px-2 rounded-full inline-block mb-4">
+                        Most Popular
+                      </div>
+                    )}
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                    <p className="text-gray-600 text-sm mb-6">{plan.description}</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold text-gray-900">${plan.price}</span>
+                      <span className="text-gray-600">/{billingCycle === 'monthly' ? 'month' : 'year'}</span>
+                    </div>
+                    <Button
+                      className={`w-full mb-6 ${
+                        plan.highlighted 
+                          ? 'bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700' 
+                          : 'bg-gray-800 hover:bg-gray-900'
+                      }`}
+                    >
+                      Start Free Trial
+                    </Button>
+                    <div className="space-y-3">
+                      {plan.features.map((feature, i) => (
+                        <div key={i} className="flex items-start">
+                          <CheckSquare className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-600 text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-16 max-w-3xl mx-auto text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h3>
+              <div className="space-y-6 mt-8">
+                {[
+                  {
+                    question: "Can I switch plans later?",
+                    answer: "Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected in your next billing cycle."
+                  },
+                  {
+                    question: "Is there a free trial?",
+                    answer: "Yes, all plans come with a 14-day free trial. No credit card required to start."
+                  },
+                  {
+                    question: "What payment methods do you accept?",
+                    answer: "We accept all major credit cards, PayPal, and Apple Pay."
+                  }
+                ].map((faq, i) => (
+                  <div key={i} className="bg-gray-50 rounded-lg p-6 text-left">
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">{faq.question}</h4>
+                    <p className="text-gray-600">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer
+        onPrivacyClick={() => onBack('privacy')}
+        onTeamClick={() => onBack('team')}
+        onAboutClick={() => onBack('about')}
+      />
+      <AccessibilityControls />
+    </div>
+  );
+};
+
 // Main App Component
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -1030,6 +1295,8 @@ function App() {
         return <TeamPage onBack={() => setCurrentPage('home')} />
       case 'about':
         return <AboutPage onBack={() => setCurrentPage('home')} />
+      case 'pricing':
+        return <PricingPage onBack={() => setCurrentPage('home')} />
       default:
         return (
           <div className="min-h-screen bg-white">
