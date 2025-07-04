@@ -100,22 +100,21 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Flowo
-            </span>
+            <img
+              src="/images/logo.png"
+              alt="Flowo Logo"
+              className="h-10 w-auto"
+            />
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-10">
             {['Why Flowo', 'Who It\'s For', 'Mission', 'Testimonials'].map((item) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase().replace(/\s+/g, '-').replace(/'/g, '')}`}
-                className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
-                whileHover={{ y: -2 }}
+                className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-base tracking-wide"
+                whileHover={{ y: -2, scale: 1.05 }}
                 whileTap={{ y: 0 }}
               >
                 {item}
@@ -123,22 +122,25 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
             ))}
             <motion.button
               onClick={() => setCurrentPage('about')}
-              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
-              whileHover={{ y: -2 }}
+              className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-base tracking-wide"
+              whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ y: 0 }}
             >
               About
             </motion.button>
             <motion.button
               onClick={() => setCurrentPage('team')}
-              className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
-              whileHover={{ y: -2 }}
+              className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-base tracking-wide"
+              whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ y: 0 }}
             >
               Team
             </motion.button>
-            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-              Join Beta
+            <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all text-white text-base">
+              <span className="flex items-center">
+                <Sparkles className="w-4 h-4 mr-2" />
+                Join Beta
+              </span>
             </Button>
           </div>
 
@@ -146,10 +148,10 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden bg-gray-100 hover:bg-gray-200 rounded-full p-2 shadow-sm"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X /> : <Menu />}
+            {isMenuOpen ? <X className="w-6 h-6 text-gray-800" /> : <Menu className="w-6 h-6 text-gray-800" />}
           </Button>
         </div>
 
@@ -163,19 +165,19 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-6 py-2">
                 {['Why Flowo', 'Who It\'s For', 'Mission', 'Testimonials'].map((item) => (
                   <a
                     key={item}
                     href={`#${item.toLowerCase().replace(/\s+/g, '-').replace(/'/g, '')}`}
-                    className="text-gray-600 hover:text-purple-600 transition-colors font-medium"
+                    className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-lg tracking-wide"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item}
                   </a>
                 ))}
                 <button
-                  className="text-gray-600 hover:text-purple-600 transition-colors font-medium text-left"
+                  className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-lg tracking-wide text-left"
                   onClick={() => {
                     setCurrentPage('about');
                     setIsMenuOpen(false);
@@ -184,7 +186,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
                   About
                 </button>
                 <button
-                  className="text-gray-600 hover:text-purple-600 transition-colors font-medium text-left"
+                  className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-lg tracking-wide text-left"
                   onClick={() => {
                     setCurrentPage('team');
                     setIsMenuOpen(false);
@@ -192,8 +194,11 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
                 >
                   Team
                 </button>
-                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 w-full">
-                  Join Beta
+                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 w-full font-semibold py-3 rounded-full shadow-md hover:shadow-lg transition-all mt-2 text-white">
+                  <span className="flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Join Beta
+                  </span>
                 </Button>
               </div>
             </motion.div>
@@ -278,17 +283,19 @@ const HeroSection = () => {
             </MagneticButton>
           </motion.div>
 
-          <motion.p
+          <motion.div
             variants={fadeInUp}
-            className="text-sm opacity-75"
+            className="mt-8 sm:mt-10 md:mt-12"
           >
-            No credit card required • Free beta access
-          </motion.p>
+            <p className="text-sm sm:text-base opacity-75 mb-2">
+              No credit card required • Free beta access
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Enhanced Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4 sm:mb-6 md:mb-8"
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
@@ -297,12 +304,12 @@ const HeroSection = () => {
             whileHover={{ scale: 1.1 }}
             onClick={() => document.getElementById('why-flowo')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <span className="text-sm mb-2">Scroll to explore</span>
+            <span className="text-sm mb-2 sm:mb-3 md:mb-4">Scroll to explore</span>
             <motion.div
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              <ArrowDown className="w-5 h-5" />
+              <ArrowDown className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -711,26 +718,29 @@ const BetaSignupSection = () => {
             {/* Tally.so Form */}
             <TallyForm />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              {[
-                { icon: CheckSquare, text: "Free Beta Access" },
-                { icon: X, text: "No Credit Card Required" },
-                { icon: Sparkles, text: "Early Access Features" }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.text}
-                  className="flex items-center justify-center space-x-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                    <CheckSquare className="w-4 h-4 text-white" />
-                  </div>
-                  <span className="text-gray-600 font-medium">{item.text}</span>
-                </motion.div>
-              ))}
+            <div className="mt-16 sm:mt-20 md:mt-24 mb-8">
+              <h3 className="text-2xl font-bold text-gray-800 mb-6">What You'll Get</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
+                {[
+                  { icon: CheckSquare, text: "Free Beta Access" },
+                  { icon: X, text: "No Credit Card Required" },
+                  { icon: Sparkles, text: "Early Access Features" }
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.text}
+                    className="flex flex-col sm:flex-row items-center justify-center sm:justify-start space-y-2 sm:space-y-0 sm:space-x-3 p-4 bg-gray-50 rounded-lg"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="w-8 h-8 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center">
+                      <CheckSquare className="w-5 h-5 sm:w-4 sm:h-4 text-white" />
+                    </div>
+                    <span className="text-gray-700 font-semibold text-lg sm:text-base">{item.text}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
@@ -747,10 +757,11 @@ const Footer = ({ onPrivacyClick, onTeamClick, onAboutClick }) => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <Brain className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-2xl font-bold">Flowo</span>
+              <img
+                src="/images/logo.png"
+                alt="Flowo Logo"
+                className="h-10 w-auto"
+              />
             </div>
             <p className="text-gray-400 mb-4">
               Revolutionary planning for neurodivergent minds.
