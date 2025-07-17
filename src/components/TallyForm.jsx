@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 /**
  * TallyForm component that embeds a Tally.so form
@@ -12,7 +12,7 @@ import { Card, CardContent } from '@/components/ui/card'
  */
 const TallyForm = () => {
   // URL for the Tally.so form with configuration parameters
-  const tallyFormUrl = "https://tally.so/embed/mZApRa?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+  const tallyFormUrl = "https://tally.so/embed/mZApRa?alignLeft=1&hideTitle=1&dynamicHeight=1"
 
   // Load the Tally.so embed script
   useEffect(() => {
@@ -31,23 +31,28 @@ const TallyForm = () => {
   }, [])
 
   return (
-    <div className="w-full">
-      <Card className="border-0 shadow-xl overflow-hidden">
-        <CardContent className="p-0">
-          <iframe
-            data-tally-src={tallyFormUrl}
-            loading="lazy"
-            width="100%"
-            height="600"
-            frameBorder="0"
-            marginHeight="0"
-            marginWidth="0"
-            title="Flowo Beta Signup"
-            className="rounded-lg"
-          />
-        </CardContent>
-      </Card>
-    </div>
+    <section id="beta-signup" className="py-2">
+      <div className="container mx-auto px-4">
+        <Card className="bg-white rounded-2xl overflow-hidden max-w-3xl mx-auto shadow-lg py-0 gap-0">
+          {/* Header with title and description */}
+          <CardHeader className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-8 rounded-t-2xl">
+            <CardTitle>Sign up to try Flowo before everyone else.</CardTitle>
+          </CardHeader>
+          <CardContent className="flex justify-center px-6 pb-8">
+            <iframe
+              data-tally-src={tallyFormUrl}
+              loading="lazy"
+              style={{ minHeight: '500px' }}
+              frameBorder="0"
+              marginHeight="0"
+              marginWidth="0"
+              title="Flowo Beta Signup"
+              className="w-full md:w-4/5 lg:w-3/4 mx-auto"
+            />
+          </CardContent>
+        </Card>
+      </div>
+    </section>
   )
 }
 

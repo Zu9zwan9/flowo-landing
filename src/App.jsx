@@ -4,10 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { Progress } from '@/components/ui/progress'
-import AccessibilityControls from '@/components/AccessibilityControls'
 import PrivacyPolicy from '@/components/PrivacyPolicy'
 import TallyForm from '@/components/TallyForm'
+import MockupGallery from '@/components/MockupGallery'
 import {
   FloatingParticles,
   AnimatedCounter,
@@ -80,7 +79,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
   }, [])
 
   // Don't show navigation on privacy page
-  if (currentPage === 'privacy') {
+  if (currentPage === 'privacy' || currentPage === 'about' || currentPage === 'team') {
     return null
   }
 
@@ -93,7 +92,7 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-4 overflow-x-hidden">
         <div className="flex items-center justify-between">
           <motion.div
             className="flex items-center space-x-2"
@@ -113,7 +112,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase().replace(/\s+/g, '-').replace(/'/g, '')}`}
-                className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-base tracking-wide"
+                className={`transition-colors font-semibold text-base tracking-wide ${
+                  isScrolled ? 'text-gray-800 hover:text-purple-600' : 'text-white hover:text-purple-200'
+                }`}
                 whileHover={{ y: -2, scale: 1.05 }}
                 whileTap={{ y: 0 }}
               >
@@ -122,7 +123,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
             ))}
             <motion.button
               onClick={() => setCurrentPage('about')}
-              className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-base tracking-wide"
+              className={`transition-colors font-semibold text-base tracking-wide ${
+                isScrolled ? 'text-gray-800 hover:text-purple-600' : 'text-white hover:text-purple-200'
+              }`}
               whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ y: 0 }}
             >
@@ -130,7 +133,9 @@ const Navigation = ({ isMenuOpen, setIsMenuOpen, currentPage, setCurrentPage }) 
             </motion.button>
             <motion.button
               onClick={() => setCurrentPage('team')}
-              className="text-gray-800 hover:text-purple-600 transition-colors font-semibold text-base tracking-wide"
+              className={`transition-colors font-semibold text-base tracking-wide ${
+                isScrolled ? 'text-gray-800 hover:text-purple-600' : 'text-white hover:text-purple-200'
+              }`}
               whileHover={{ y: -2, scale: 1.05 }}
               whileTap={{ y: 0 }}
             >
@@ -259,7 +264,7 @@ const HeroSection = () => {
             className="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto"
           >
             A revolutionary AI-powered planning platform built specifically for ADHD and neurodivergent users,
-            tapping into a <AnimatedCounter end={1} suffix="B+" /> market opportunity growing at ~<AnimatedCounter end={27} suffix="%" /> annually.
+            tapping into a <AnimatedCounter end={15.2} suffix="B+" /> market opportunity growing at ~<AnimatedCounter end={27} suffix="%" /> annually.
           </motion.p>
 
           <motion.div
@@ -396,7 +401,7 @@ const WhyFlowoSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent" style={{lineHeight: '1.2'}}>
             Why Flowo?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -448,7 +453,7 @@ const WhoItsForSection = () => {
   return (
     <section id="who-its-for" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center overflow-x-hidden">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -497,10 +502,10 @@ const WhoItsForSection = () => {
               ))}
             </div>
 
-            <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
-              <Users className="w-5 h-5 mr-2" />
-              Join Our Community
-            </Button>
+            {/*<Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">*/}
+            {/*  <Users className="w-5 h-5 mr-2" />*/}
+            {/*  Join Our Community*/}
+            {/*</Button>*/}
           </motion.div>
 
           <motion.div
@@ -521,7 +526,7 @@ const WhoItsForSection = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <StatCard
-                    value={<><AnimatedCounter end={1} />B+</>}
+                    value={<><AnimatedCounter end={15.2 } />B+</>}
                     label="Market Size"
                     icon={DollarSign}
                     color="bg-gradient-to-r from-purple-500 to-purple-600"
@@ -675,7 +680,7 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent" style={{lineHeight: '1.2'}}>
             What Our Beta Users Say
           </h2>
           <p className="text-xl text-gray-600">Real feedback from neurodivergent individuals using Flowo</p>
@@ -855,251 +860,222 @@ const TeamPage = ({ onBack }) => {
       bio: "Mykhailo is a skilled software engineer passionate about creating technology that makes a real difference. During their university years, he and Maksym worked closely together, designing architectures, developing applications, and sharing a common vision for meaningful innovation. Deeply committed to projects that create social impact, Mykhailo immediately connected with the idea behind Flowo. As CTO, he leads the technical development of the platform, applying best practices in system design, scalability, and user-centered development. His expertise ensures that Flowo is not only powerful and reliable, but also intuitive and accessible for neurodivergent individuals. Together with Maksym, he continues to push Flowo forward, combining cutting-edge technology with a mission of real-world empowerment.",
       initial: "M"
     }
-  ];
+  ]
 
-  // Function to navigate to a section on the home page
   const navigateToSection = (sectionId) => {
-    onBack();
-    // Use setTimeout to ensure the home page is loaded before scrolling
+    onBack()
     setTimeout(() => {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }
 
   return (
-    <div className="min-h-screen bg-white">
-      <main className="pt-20">
-        <section className="py-20 bg-gradient-to-b from-purple-50 to-white">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-16 text-center"
-            >
-              <Button
-                variant="ghost"
-                className="mb-8"
-                onClick={onBack}
-              >
-                ← Back to Home
-              </Button>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Our Team
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Meet the passionate minds behind Flowo, dedicated to creating better planning tools for neurodivergent individuals.
-              </p>
-            </motion.div>
-
-            {/* Quick Navigation */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('why-flowo')}
-              >
-                Why Flowo
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('who-its-for')}
-              >
-                Who It's For
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('mission')}
-              >
-                Mission
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('testimonials')}
-              >
-                Testimonials
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-              {teamMembers.map((member, index) => (
-                <motion.div
-                  key={member.name}
-                  initial={{ opacity: 0, y: 50 }}
+      <div className="min-h-screen bg-gray-50">
+        <main className="">
+          <section className="py-20 bg-gradient-to-b from-purple-50 to-gray-100">
+            <div className="container mx-auto px-4">
+              <motion.div
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className="bg-white rounded-xl shadow-xl overflow-hidden"
+                  transition={{ duration: 0.6 }}
+                  className="mb-16 text-center"
+              >
+                <Button
+                    variant="ghost"
+                    className="mb-8 text-gray-800 hover:text-gray-900"
+                    onClick={onBack}
                 >
-                  <div className="p-8">
-                    <div className="flex items-center mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
-                        {member.initial}
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold text-gray-900">{member.name}</h2>
-                        <p className="text-purple-600 font-medium">{member.role}</p>
-                      </div>
-                    </div>
+                  ← Back to Home
+                </Button>
+                <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                  Our Team
+                </h1>
+                <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+                  Meet the passionate minds behind Flowo, dedicated to creating better planning tools for neurodivergent individuals.
+                </p>
+              </motion.div>
 
-                    <div className="mb-6">
-                      {member.titles.map((title, i) => (
-                        <Badge key={i} className="mr-2 mb-2 bg-purple-100 text-purple-800 hover:bg-purple-200">
-                          {title}
-                        </Badge>
-                      ))}
-                    </div>
+              {/* Quick Navigation */}
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
+                {[
+                  ['why-flowo', 'Why Flowo'],
+                  ['who-its-for', "Who It's For"],
+                  ['mission', 'Mission'],
+                  ['testimonials', 'Testimonials']
+                ].map(([id, label]) => (
+                    <Button
+                        key={id}
+                        variant="outline"
+                        className="text-gray-800 border-gray-300 hover:bg-gray-200"
+                        onClick={() => navigateToSection(id)}
+                    >
+                      {label}
+                    </Button>
+                ))}
+              </div>
 
-                    <p className="text-gray-600 leading-relaxed mb-6">
-                      {member.bio}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                {teamMembers.map((member, index) => (
+                    <motion.div
+                        key={member.name}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        className="bg-gray-50 rounded-xl shadow-lg overflow-hidden mb-20"
+                    >
+                      <div className="p-8 bg-gray-50">
+                        <div className="flex items-center mb-6">
+                          <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mr-4">
+                            {member.initial}
+                          </div>
+                          <div>
+                            <h2 className="text-2xl font-bold text-gray-900">{member.name}</h2>
+                            <p className="text-purple-600 font-medium">{member.role}</p>
+                          </div>
+                        </div>
+
+                        <div className="mb-6">
+                          {member.titles.map((title, i) => (
+                              <Badge key={i} className="mr-2 mb-2 bg-purple-100 text-purple-800">
+                                {title}
+                              </Badge>
+                          ))}
+                        </div>
+
+                        <p className="text-gray-800 leading-relaxed mb-6">
+                          {member.bio}
+                        </p>
+                      </div>
+                    </motion.div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      </main>
-      <Footer
-        onPrivacyClick={() => onBack('privacy')}
-        onTeamClick={() => {}}
-        onAboutClick={() => onBack('about')}
-      />
-      <AccessibilityControls />
-    </div>
-  );
-};
+          </section>
+        </main>
+
+        <Footer
+            onPrivacyClick={() => onBack('privacy')}
+            onTeamClick={() => onBack('team')}
+            onAboutClick={() => onBack('about')}
+        />
+      </div>
+  )
+}
 
 // About Page Component
 const AboutPage = ({ onBack }) => {
   // Function to navigate to a section on the home page
   const navigateToSection = (sectionId) => {
-    onBack();
-    // Use setTimeout to ensure the home page is loaded before scrolling
+    onBack()
     setTimeout(() => {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  }
 
   return (
-    <div className="min-h-screen bg-white">
-      <main className="pt-20">
-        <section className="py-20 bg-gradient-to-b from-purple-50 to-white">
-          <div className="container mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-16 text-center"
-            >
-              <Button
-                variant="ghost"
-                className="mb-8"
-                onClick={onBack}
-              >
-                ← Back to Home
-              </Button>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                About Flowo
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Our journey to create better planning tools for neurodivergent minds.
-              </p>
-            </motion.div>
-
-            {/* Quick Navigation */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('why-flowo')}
-              >
-                Why Flowo
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('who-its-for')}
-              >
-                Who It's For
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('mission')}
-              >
-                Mission
-              </Button>
-              <Button
-                variant="outline"
-                className="bg-white hover:bg-gray-50"
-                onClick={() => navigateToSection('testimonials')}
-              >
-                Testimonials
-              </Button>
-            </div>
-
-            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
-              <div className="p-8">
-                <motion.div
+      <div className="min-h-screen bg-gray-50">
+        <main className="">
+          <section className="py-20 bg-gradient-to-b from-purple-50 to-gray-100">
+            <div className="container mx-auto px-4">
+              <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
+                  className="mb-16 text-center"
+              >
+                <Button
+                    variant="ghost"
+                    className="mb-8 text-gray-800 hover:text-gray-900"
+                    onClick={onBack}
                 >
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Journey</h2>
-                  <p className="text-gray-600 leading-relaxed mb-8">
-                    Our journey began with firsthand experience: when Maksym was diagnosed with ADHD, it sparked a deeper exploration into the everyday challenges neurodivergent individuals face with traditional planning tools.
-                  </p>
+                  ← Back to Home
+                </Button>
+                <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                  About Flowo
+                </h1>
+                <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+                  Our journey to create better planning tools for neurodivergent minds.
+                </p>
+              </motion.div>
 
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Research & Insights</h2>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    In early 2024, we initiated a research project focused on understanding the needs of ADHD teens. This included:
-                  </p>
+              {/* Quick Navigation */}
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
+                {[
+                  ['why-flowo', 'Why Flowo'],
+                  ['who-its-for', "Who It's For"],
+                  ['mission', 'Mission'],
+                  ['testimonials', 'Testimonials']
+                ].map(([id, label]) => (
+                    <Button
+                        key={id}
+                        variant="outline"
+                        className="text-gray-800 border-gray-300 hover:bg-gray-200"
+                        onClick={() => navigateToSection(id)}
+                    >
+                      {label}
+                    </Button>
+                ))}
+              </div>
 
-                  <ul className="list-disc pl-6 mb-8 text-gray-600 space-y-2">
-                    <li>1:1 interviews with neurodivergent individuals and their caregivers</li>
-                    <li>Online surveys targeting ADHD communities</li>
-                    <li>Observation sessions to understand how users interact with existing planning tools</li>
-                  </ul>
+              <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="p-8 bg-gray-50">
+                  <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6 }}
+                  >
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Journey</h2>
+                    <p className="text-gray-800 leading-relaxed mb-8">
+                      Our journey began with firsthand experience: when Maksym was diagnosed with ADHD, it sparked a deeper exploration into the everyday challenges neurodivergent individuals face with traditional planning tools.
+                    </p>
 
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Key Insights</h2>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    Key insights emerged consistently across our research:
-                  </p>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Research & Insights</h2>
+                    <p className="text-gray-800 leading-relaxed mb-6">
+                      In early 2024, we initiated a research project focused on understanding the needs of ADHD teens. This included:
+                    </p>
 
-                  <ul className="list-disc pl-6 mb-8 text-gray-600 space-y-2">
-                    <li>Difficulty initiating tasks</li>
-                    <li>Frustration with rigid, linear planning systems</li>
-                    <li>Overwhelm from traditional tools that demand high executive function</li>
-                    <li>The need for visual, intuitive, and forgiving systems</li>
-                    <li>A strong desire for tools that adapt to the user, not the other way around</li>
-                  </ul>
+                    <ul className="list-disc pl-6 mb-8 text-gray-800 space-y-2">
+                      <li>1:1 interviews with neurodivergent individuals and their caregivers</li>
+                      <li>Online surveys targeting ADHD communities</li>
+                      <li>Observation sessions to understand how users interact with existing planning tools</li>
+                    </ul>
 
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Solution</h2>
-                  <p className="text-gray-600 leading-relaxed mb-8">
-                    This validation process shaped both the vision and functionality of Flowo. The user pain points we uncovered continue to guide our design and development priorities. We are building Flowo, a flexible planning tool designed from the ground up for ADHD'ers and other neurodivergent users. It includes features like visual timers, adaptive AI-generated checklists, and non-linear, intuitive scheduling that meets users where they are—mentally and emotionally.
-                  </p>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Key Insights</h2>
+                    <p className="text-gray-800 leading-relaxed mb-6">
+                      Key insights emerged consistently across our research:
+                    </p>
 
-                  <p className="text-gray-600 leading-relaxed font-medium">
-                    The core goal is to reduce overwhelm, support task initiation, and create a planning experience that aligns with how users actually think.
-                  </p>
-                </motion.div>
+                    <ul className="list-disc pl-6 mb-8 text-gray-800 space-y-2">
+                      <li>Difficulty initiating tasks</li>
+                      <li>Frustration with rigid, linear planning systems</li>
+                      <li>Overwhelm from traditional tools that demand high executive function</li>
+                      <li>The need for visual, intuitive, and forgiving systems</li>
+                      <li>A strong desire for tools that adapt to the user, not the other way around</li>
+                    </ul>
+
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Solution</h2>
+                    <p className="text-gray-800 leading-relaxed mb-8">
+                      This validation process shaped both the vision and functionality of Flowo. The user pain points we uncovered continue to guide our design and development priorities. We are building Flowo, a flexible planning tool designed from the ground up for ADHD'ers and other neurodivergent users. It includes features like visual timers, adaptive AI-generated checklists, and non-linear, intuitive scheduling that meets users where they are—mentally and emotionally.
+                    </p>
+
+                    <p className="text-gray-800 leading-relaxed font-medium">
+                      The core goal is to reduce overwhelm, support task initiation, and create a planning experience that aligns with how users actually think.
+                    </p>
+                  </motion.div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
-      <Footer
-        onPrivacyClick={() => onBack('privacy')}
-        onTeamClick={() => onBack('team')}
-        onAboutClick={() => {}}
-      />
-      <AccessibilityControls />
-    </div>
-  );
-};
+          </section>
+        </main>
+
+        <Footer
+            onPrivacyClick={() => onBack('privacy')}
+            onTeamClick={() => onBack('team')}
+            onAboutClick={() => {}}
+        />
+      </div>
+  )
+}
 
 // Pricing Page Component
 const PricingPage = ({ onBack }) => {
@@ -1277,7 +1253,7 @@ const PricingPage = ({ onBack }) => {
         onTeamClick={() => onBack('team')}
         onAboutClick={() => onBack('about')}
       />
-      <AccessibilityControls />
+      {/*<AccessibilityControls />*/}
     </div>
   );
 };
@@ -1306,6 +1282,7 @@ function App() {
               <WhoItsForSection />
               <MissionSection />
               <TestimonialsSection />
+              <MockupGallery />
               <BetaSignupSection />
             </main>
             <Footer
@@ -1313,7 +1290,7 @@ function App() {
               onTeamClick={() => setCurrentPage('team')}
               onAboutClick={() => setCurrentPage('about')}
             />
-            <AccessibilityControls />
+            {/*<AccessibilityControls />*/}
           </div>
         )
     }

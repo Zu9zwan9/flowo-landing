@@ -102,3 +102,18 @@ html {
   }
 }
 
+/* Add MockupGallery slide scaling */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+.swiper-slide .slide-img {
+  transform: scale(0.7);
+  transition: transform 0.3s;
+}
+.swiper-slide-active .slide-img {
+  transform: scale(0.9);
+}
+.swiper-pagination {
+  bottom: 0;
+}

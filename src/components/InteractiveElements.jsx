@@ -3,11 +3,11 @@ import { motion, useAnimation, useInView } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { 
-  Brain, 
-  Sparkles, 
-  Timer, 
-  CheckSquare, 
+import {
+  Brain,
+  Sparkles,
+  Timer,
+  CheckSquare,
   Zap,
   Heart,
   Star,
@@ -67,9 +67,9 @@ export const AnimatedCounter = ({ end, duration = 2, suffix = "" }) => {
       const animate = (currentTime) => {
         if (startTime === null) startTime = currentTime
         const progress = Math.min((currentTime - startTime) / (duration * 1000), 1)
-        
+
         setCount(Math.floor(progress * end))
-        
+
         if (progress < 1) {
           requestAnimationFrame(animate)
         }
@@ -112,12 +112,12 @@ export const MorphingIcon = ({ icons, interval = 3000 }) => {
 }
 
 // Interactive feature card with hover effects
-export const InteractiveFeatureCard = ({ 
-  icon: Icon, 
-  title, 
-  description, 
+export const InteractiveFeatureCard = ({
+  icon: Icon,
+  title,
+  description,
   color = "from-purple-500 to-pink-500",
-  delay = 0 
+  delay = 0
 }) => {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -138,16 +138,16 @@ export const InteractiveFeatureCard = ({
           animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
           transition={{ duration: 0.5 }}
         />
-        
+
         <CardContent className="p-6 relative z-10">
-          <motion.div 
+          <motion.div
             className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-r ${color} rounded-2xl flex items-center justify-center`}
-            animate={isHovered ? { 
-              scale: 1.1, 
+            animate={isHovered ? {
+              scale: 1.1,
               rotate: 5,
               boxShadow: "0 20px 40px rgba(139, 92, 246, 0.3)"
-            } : { 
-              scale: 1, 
+            } : {
+              scale: 1,
               rotate: 0,
               boxShadow: "0 10px 20px rgba(139, 92, 246, 0.1)"
             }}
@@ -155,16 +155,16 @@ export const InteractiveFeatureCard = ({
           >
             <Icon className="w-8 h-8 text-white" />
           </motion.div>
-          
-          <motion.h3 
+
+          <motion.h3
             className="text-xl font-bold text-gray-900 mb-3 text-center"
             animate={isHovered ? { y: -2 } : { y: 0 }}
             transition={{ duration: 0.3 }}
           >
             {title}
           </motion.h3>
-          
-          <motion.p 
+
+          <motion.p
             className="text-gray-600 text-center leading-relaxed"
             animate={isHovered ? { y: -2 } : { y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
@@ -178,8 +178,7 @@ export const InteractiveFeatureCard = ({
             animate={isHovered ? { x: 5 } : { x: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <span className="text-sm font-medium mr-2">Learn more</span>
-            <ArrowRight className="w-4 h-4" />
+       
           </motion.div>
         </CardContent>
       </Card>
@@ -258,14 +257,14 @@ export const MagneticButton = ({ children, ...props }) => {
 
   const handleMouseMove = (e) => {
     if (!isHovered) return
-    
+
     const rect = e.currentTarget.getBoundingClientRect()
     const centerX = rect.left + rect.width / 2
     const centerY = rect.top + rect.height / 2
-    
+
     const deltaX = (e.clientX - centerX) * 0.15
     const deltaY = (e.clientY - centerY) * 0.15
-    
+
     setPosition({ x: deltaX, y: deltaY })
   }
 
@@ -294,7 +293,7 @@ export const StaggeredText = ({ text, className = "" }) => {
   const words = text.split(' ')
 
   return (
-    <motion.div 
+    <motion.div
       className={className}
       initial="hidden"
       whileInView="visible"
@@ -345,8 +344,8 @@ export const FloatingActionButton = ({ icon: Icon, tooltip, onClick, className =
       {/* Tooltip */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8, y: 10 }}
-        animate={{ 
-          opacity: showTooltip ? 1 : 0, 
+        animate={{
+          opacity: showTooltip ? 1 : 0,
           scale: showTooltip ? 1 : 0.8,
           y: showTooltip ? 0 : 10
         }}
