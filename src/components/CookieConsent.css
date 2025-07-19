@@ -1,0 +1,101 @@
+/* Cookie Consent Styles */
+.cky-consent-bar {
+  background-color: #ffffff;
+  color: #212121;
+  font-family: inherit;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  box-shadow: 0 -1px 10px 0 rgba(172, 171, 171, 0.3);
+}
+
+.cky-notice {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 30px;
+}
+
+.cky-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  color: #212121;
+}
+
+.cky-notice-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.cky-notice-des {
+  margin-bottom: 15px;
+  color: #212121;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cky-notice-des p {
+  margin: 0;
+}
+
+.cky-notice-btn-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cky-btn {
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+}
+
+.cky-btn-customize {
+  background-color: transparent;
+  border: 1px solid #1863dc;
+  color: #1863dc;
+}
+
+.cky-btn-customize:hover {
+  background-color: rgba(24, 99, 220, 0.1);
+}
+
+.cky-btn-reject {
+  background-color: #f2f2f2;
+  border: 1px solid #dedede;
+  color: #666666;
+}
+
+.cky-btn-reject:hover {
+  background-color: #e9e9e9;
+}
+
+.cky-btn-accept {
+  background-color: #1863dc;
+  border: 1px solid #1863dc;
+  color: #ffffff;
+}
+
+.cky-btn-accept:hover {
+  background-color: #0c52bc;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  .cky-notice-group {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cky-notice-des {
+    margin-bottom: 0;
+    margin-right: 20px;
+    flex: 1;
+  }
+}

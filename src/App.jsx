@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import PrivacyPolicy from '@/components/PrivacyPolicy'
 import TallyForm from '@/components/TallyForm'
 import MockupGallery from '@/components/MockupGallery'
+import CookieConsent from '@/components/CookieConsent'
 import {
   FloatingParticles,
   AnimatedCounter,
@@ -1305,6 +1306,7 @@ function App() {
         setCurrentPage={setCurrentPage}
       />
       {renderPage()}
+      <CookieConsent />
     </>
   )
 }
